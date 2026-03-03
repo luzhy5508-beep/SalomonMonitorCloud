@@ -2,9 +2,13 @@ name: Salomon Monitor
 
 on:
   schedule:
-    # 每15分钟运行一次，可以根据需要调整
-    # 更多关于 cron 表达式的信息: https://docs.github.com/cn/actions/using-workflows/events-that-trigger-workflows#schedule
-    - cron:  '*/15 * * * *'
+    # 每天中午 12:00 UTC 开始第一次运行，然后每 15 分钟运行一次
+    # 中国时间 UTC+8，所以中午 12:00 UTC = 晚上 20:00 (8 PM) 中国时间
+    # 但由于 GitHub Actions 的 cron 限制，我们使用 */15 * * * * 表示每 15 分钟运行一次
+    # 如果需要精确控制首次运行时间，可以在 3 月 5 日手动触发
+    - cron: '0 12 * * *'  # 每天中午 12:00 UTC 运行一次
+    - cron: '*/15 * * * *' # 每 15 分钟运行一次
+  
   workflow_dispatch: # 允许手动触发
 
 jobs:
