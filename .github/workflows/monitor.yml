@@ -3,7 +3,6 @@ name: Salomon Monitor
 on:
   schedule:
     - cron: '*/15 * * * *' # 换回通配符写法，兼容性更好
-  workflow_dispatch:
 
 jobs:
   monitor:
